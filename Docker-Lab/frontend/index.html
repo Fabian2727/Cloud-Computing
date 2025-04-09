@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login App</title></head>
+<body>
+  <h2>Login</h2>
+  <form onsubmit="login(); return false;">
+    <input id="user" placeholder="Usuario"><br>
+    <input id="pass" type="password" placeholder="Contraseña"><br>
+    <button type="submit">Ingresar</button>
+  </form>
+  <script>
+    function login() {
+      const user = document.getElementById("user").value;
+      const pass = document.getElementById("pass").value;
+
+      fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user, pass }),
+      })
+      .then(res => res.json())
+      .then(data => alert(data.message));
+    }
+  </script>
+</body>
+</html>
